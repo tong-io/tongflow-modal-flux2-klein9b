@@ -15,13 +15,8 @@ Add in TongFlow **Settings** (gear icon, top-right):
 | --- | --- | --- |
 | `MODAL_TOKEN_ID` | ✅ | Create at [modal.com/settings/tokens](https://modal.com/settings/tokens). |
 | `MODAL_TOKEN_SECRET` | ✅ | Paired with `MODAL_TOKEN_ID`. |
+| `HF_TOKEN` | ✅ | FLUX.2 is gated — accept the FLUX license for `black-forest-labs/FLUX.2-dev` and `black-forest-labs/FLUX.2-klein-9b-kv` on Hugging Face first. |
 
 ### Gated weights (Hugging Face)
 
-The FLUX.2 weights are **gated**. Accept the FLUX license on Hugging Face for `black-forest-labs/FLUX.2-dev` and `black-forest-labs/FLUX.2-klein-9b-kv`, then create the Modal secret the plugin reads at deploy time:
-
-```bash
-modal secret create huggingface HF_TOKEN=hf_xxx
-```
-
-Without it, fetching the gated weights returns HTTP 403. (`Qwen/Qwen3-8B-FP8` is public.)
+The plugin injects `HF_TOKEN` from your TongFlow Settings into the Modal download job at deploy time — no manual `modal secret create` needed. Without a valid token, fetching the gated weights returns HTTP 403. (`Qwen/Qwen3-8B-FP8` is public.)
