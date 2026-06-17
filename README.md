@@ -1,6 +1,6 @@
 # tongflow-modal-flux2-klein9b
 
-Official TongFlow plugin. Multi-reference image fusion and instruction-based image editing with **FLUX.2 Klein 9B** (`black-forest-labs/FLUX.2-klein-9b-kv`, with `FLUX.2-dev` and `Qwen/Qwen3-8B-FP8`), running on a GPU via [Modal](https://modal.com).
+Official [TongFlow](https://github.com/tong-io/tongflow) plugin. Multi-reference image fusion and instruction-based image editing with **FLUX.2 Klein 9B** (`black-forest-labs/FLUX.2-klein-9b-kv`, with `FLUX.2-dev` and `Qwen/Qwen3-8B-FP8`), running on a GPU via [Modal](https://modal.com).
 
 ## Capabilities
 
