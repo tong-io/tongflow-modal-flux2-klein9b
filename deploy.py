@@ -85,7 +85,7 @@ image = (
     .apt_install("git", "build-essential")
     .run_commands(f"git clone --depth 1 {FLUX2_GIT} {FLUX2_DIR}")
     .pip_install(
-        "tongflow==0.1.0",
+        "tongflow==0.2.13", "fastapi[standard]",
         "einops==0.8.1",
         "transformers==4.56.1",
         "safetensors>=0.4.5",
@@ -357,3 +357,18 @@ class Inference:
             height=input.height if input.height is not None else 768,
         )
         return ImageFusionOutput(success=True, image=asset(raw, mime="image/png"))
+
+    @modal.fastapi_endpoint(method="GET", label=f"{Path(__file__).resolve().parent.name}-serve")
+    def serve(self, taskId: str = "", token: str = "", origin: str = ""):
+        from fastapi.responses import StreamingResponse
+        from tongflow import serve_stream_from_spec
+
+        return StreamingResponse(
+            serve_stream_from_spec(
+                origin, taskId, token, __file__,
+                invoke=lambda m, inp: getattr(self, m).local(inp),
+            ),
+            media_type="text/event-stream",
+            headers={"Cache-Control": "no-cache", "Access-Control-Allow-Origin": "*"},
+        )
+
