@@ -85,7 +85,7 @@ image = (
     .apt_install("git", "build-essential")
     .run_commands(f"git clone --depth 1 {FLUX2_GIT} {FLUX2_DIR}")
     .pip_install(
-        "tongflow==0.2.13", "fastapi[standard]",
+        "tongflow==0.2.16", "fastapi[standard]",
         "einops==0.8.1",
         "transformers==4.56.1",
         "safetensors>=0.4.5",
